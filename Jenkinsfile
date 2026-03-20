@@ -5,7 +5,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t warner-django .'
+                sh 'cd warnerapp && docker build -t warner-django .'
             }
         }
 
@@ -17,8 +17,8 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f deployment.yaml'
-                sh 'kubectl apply -f service.yaml'
+                sh 'cd warnerapp && kubectl apply -f deployment.yaml'
+                sh 'cd warnerapp && kubectl apply -f service.yaml'
             }
         }
 
