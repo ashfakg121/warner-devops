@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: warner-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: warner
+  template:
+    metadata:
+      labels:
+        app: warner
+    spec:
+      containers:
+        - name: warner-container
+          image: warner-django
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
